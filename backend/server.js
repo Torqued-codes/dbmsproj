@@ -32,13 +32,15 @@ db.getConnection((err, connection) => {
 });
 
 // 3. API ROUTE: FETCH PATIENTS (GET Request)
+// API ROUTE 3: FETCH FULL CLINICAL MATRIX DATA (Relational Join)
+// Make sure this is app.get and the path matches perfectly
 app.get('/api/patients', (req, res) => {
     const query = "SELECT PatientID, FirstName, LastName, ContactNumber, BloodGroup, Gender FROM Patients ORDER BY PatientID DESC";
     db.query(query, (err, results) => {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
-        res.json(results);
+        res.json(results); // This sends the data back to Axios
     });
 });
 
