@@ -92,7 +92,7 @@ function App() {
           <div className="bg-primary text-white p-2 rounded-3 shadow-sm">
             <Activity size={24} />
           </div>
-          <span className="h4 mb-0 fw-bold">HMS Multi-Unit Mainframe</span>
+          <span className="h4 mb-0 fw-bold">Clinic Matrix Dashboard</span>
         </div>
         <div className="d-flex align-items-center gap-3">
           <button className="btn border-0" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>

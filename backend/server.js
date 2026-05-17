@@ -31,8 +31,18 @@ db.getConnection((err, connection) => {
     }
 });
 
-// 3. API ROUTE: FETCH PATIENTS (GET Request)
-// API ROUTE 3: FETCH FULL CLINICAL MATRIX DATA (Relational Join)
+// 3. API ROUTES (GET REQUESTS FOR ALL TABLES)
+
+// A. FETCH PATIENTS 
+app.get('/api/patients', (req, res) => {
+    const query = "SELECT PatientID, FirstName, LastName, ContactNumber, BloodGroup, Gender FROM Patients ORDER BY PatientID DESC";
+    db.query(query, (err, results) => {
+        if (err) return res.status(500).json({ error: err.message });
+        res.json(results);
+    });
+});
+
+// B. FETCH DOCTORS
 app.get('/api/doctors', (req, res) => {
     db.query("SELECT DoctorID, FullName, Specialization, ContactNumber FROM Doctors", (err, results) => {
         if (err) return res.status(500).json({ error: err.message });
@@ -40,7 +50,7 @@ app.get('/api/doctors', (req, res) => {
     });
 });
 
-// API ROUTE: FETCH ALL APPOINTMENTS WITH PATIENT & DOCTOR NAMES
+// C. FETCH APPOINTMENTS WITH JOINED STRINGS
 app.get('/api/appointments', (req, res) => {
     const sql = `SELECT a.ApptID, CONCAT(p.FirstName, ' ', p.LastName) AS PatientName, 
                  d.FullName AS DoctorName, a.ApptDateTime, a.Status 
@@ -53,7 +63,7 @@ app.get('/api/appointments', (req, res) => {
     });
 });
 
-// API ROUTE: FETCH ALL PRESCRIPTIONS
+// D. FETCH PRESCRIPTIONS WITH JOINED STRINGS
 app.get('/api/prescriptions', (req, res) => {
     const sql = `SELECT pr.PrescID, CONCAT(p.FirstName, ' ', p.LastName) AS PatientName, 
                  d.FullName AS DoctorName, pr.Diagnosis, pr.MedicationName, pr.Dosage 
@@ -66,7 +76,7 @@ app.get('/api/prescriptions', (req, res) => {
     });
 });
 
-// API ROUTE: FETCH ALL BILLING RECORDS
+// E. FETCH BILLING RECORDS WITH JOINED STRINGS
 app.get('/api/billing', (req, res) => {
     const sql = `SELECT b.BillID, CONCAT(p.FirstName, ' ', p.LastName) AS PatientName, 
                  b.TotalAmount, b.TaxAmount, b.PaymentStatus FROM Billing b
