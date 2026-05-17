@@ -1,25 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-  --bg-gradient: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  --bg-card: rgba(255, 255, 255, 0.9);
   --text-main: #0f172a;
   --text-muted: #475569;
   --border-glass: rgba(15, 23, 42, 0.08);
-  --nav-btn-bg: #ffffff;
-  --nav-btn-color: #334155;
-  --shadow-3d: 0 15px 35px rgba(15, 23, 42, 0.05), inset 0 -3px 0 rgba(0, 0, 0, 0.06);
+  --table-hdr: #f1f5f9;
+  --shadow-3d: 0 15px 30px rgba(15, 23, 42, 0.04), inset 0 -3px 0 rgba(0, 0, 0, 0.05);
 }
 
 [data-theme='dark'] {
   --bg-gradient: linear-gradient(135deg, #090d16 0%, #020408 100%);
-  --bg-card: rgba(22, 30, 49, 0.8);
-  --text-main: #f8fafc;
+  --bg-card: rgba(20, 29, 47, 0.95);
+  --text-main: #ffffff;
   --text-muted: #94a3b8;
-  --border-glass: rgba(255, 255, 255, 0.06);
-  --nav-btn-bg: #1e293b;
-  --nav-btn-color: #cbd5e1;
-  --shadow-3d: 0 25px 50px rgba(0, 0, 0, 0.4), inset 0 -3px 0 rgba(255, 255, 255, 0.04);
+  --border-glass: rgba(255, 255, 255, 0.1);
+  --table-hdr: #1e293b;
+  --shadow-3d: 0 25px 50px rgba(0, 0, 0, 0.4), inset 0 -3px 0 rgba(255, 255, 255, 0.03);
 }
 
 body {
@@ -27,52 +25,42 @@ body {
   color: var(--text-main) !important;
   font-family: 'Inter', sans-serif;
   min-height: 100vh;
-  transition: background 0.4s ease, color 0.4s ease;
+  transition: all 0.3s ease;
 }
 
-/* 3D Medical Holographic Background Vectors */
-body::before, body::after {
-  content: "";
-  position: fixed;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(13, 110, 253, 0.12) 0%, rgba(13, 110, 253, 0) 70%);
-  z-index: -1;
-  animation: floatHologram 12s ease-in-out infinite alternate;
-}
-body::before { top: -10%; left: -10%; }
-body::after { bottom: -10%; right: -10%; animation-delay: -6s; }
-
-@keyframes floatHologram {
-  0% { transform: translateY(0px) scale(1); filter: blur(50px); }
-  100% { transform: translateY(40px) scale(1.15); filter: blur(70px); }
-}
-
-/* Glassmorphism 3D Layering Cards */
+/* 3D Glassmorphic Cards */
 .glass-card-3d {
   background: var(--bg-card) !important;
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--border-glass) !important;
   border-radius: 16px !important;
   box-shadow: var(--shadow-3d) !important;
-  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.3s ease;
-}
-.glass-card-3d:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12) !important;
+  color: var(--text-main) !important;
 }
 
-/* High Contrast Multi-Unit Navigation Buttons */
+/* Force Table text and wrappers to inherit dark mode contrast values */
+.table {
+  color: var(--text-main) !important;
+}
+.table thead th {
+  background-color: var(--table-hdr) !important;
+  color: var(--text-muted) !important;
+  font-weight: 700;
+  border-bottom: 2px solid var(--border-glass) !important;
+}
+.table tbody tr {
+  border-bottom: 1px solid var(--border-glass) !important;
+}
+
+/* High Contrast Navigation Buttons */
 .custom-nav-btn {
-  background: var(--nav-btn-bg) !important;
-  color: var(--nav-btn-color) !important;
+  background: var(--bg-card) !important;
+  color: var(--text-main) !important;
   border: 1px solid var(--border-glass) !important;
   font-weight: 600 !important;
   padding: 12px 24px !important;
   border-radius: 12px !important;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
   transition: all 0.2s ease !important;
 }
 .custom-nav-btn:hover {
@@ -86,18 +74,6 @@ body::after { bottom: -10%; right: -10%; animation-delay: -6s; }
   box-shadow: 0 8px 20px rgba(13, 110, 253, 0.25) !important;
 }
 
-/* Input Fields Visibility Adjustments */
-.form-control, .form-select {
-  background-color: rgba(0, 0, 0, 0.02) !important;
-  color: var(--text-main) !important;
-  border: 1px solid var(--border-glass) !important;
-  border-radius: 10px !important;
-  padding: 10px 14px !important;
-}
-[data-theme='dark'] .form-control, [data-theme='dark'] .form-select {
-  background-color: rgba(255, 255, 255, 0.03) !important;
-}
-.form-control:focus, .form-select:focus {
-  border-color: #0d6efd !important;
-  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15) !important;
-}
+
+
+
