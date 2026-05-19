@@ -1,3 +1,3 @@
 Frontend : Reactjs
-Backend : Express
+Backend : Express (api calling)
 Database : MySQL
